@@ -1,0 +1,109 @@
+services:
+  app:
+    build:
+      context: https://github_pat_xxxxxx@github.com/akaluradbx/nodejs.git
+      args:
+        GIT_TOKEN: "github_pat_xxxxxxx"
+    volumes:
+      - nodejs-storage:/usr/src/app
+    ports:
+      - "5200:5000"
+    environment:
+      - NODE_ENV=development
+    networks:
+      - proxynet
+
+networks:
+  proxynet:
+    name: custom_network
+volumes:
+  nodejs-storage:
+
+
+
+
+
+
+
+#################DockerFile
+
+
+
+# Use the official Node.js 18 Alpine image as the base
+FROM --platform=linux/amd64 node:18-alpine
+
+# Set the working directory inside the container
+WORKDIR /usr/src/app
+
+RUN apk add --no-cache git
+
+# Accept a build argument for the token
+ARG GIT_TOKEN
+
+RUN git clone https://${GIT_TOKEN}@github.com/akaluradbx/nodejs.git .
+
+# Copy package.json and package-lock.json first for efficient caching
+COPY package*.json ./
+COPY entrypoint.sh ./entrypoint.sh
+
+# Copy the rest of your application code
+COPY . .
+
+# Expose the port your app runs on (change if your app uses a different port)
+EXPOSE 5000
+
+RUN chmod +x ./entrypoint.sh
+
+# Command to run your app
+CMD ["sh", "./entrypoint.sh"]
+
+
+
+
+#################app.js
+const express = require('express');
+const app = express();
+
+app.get('/', (req, res) => {
+  res.send('Hello World 5');
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
+
+
+
+
+##########entrypoint.sh
+
+# entrypoint.sh
+#!/bin/sh
+git pull
+npm install
+npm start
+
+
+
+###########package.json
+
+{
+  "name": "node-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
+
+On Sat, Apr 26, 2025 at 10:16 PM Ajit Kalura <ajit.kalura@gmail.com> wrote:
+git clone https://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@github.com/akaluradbx/nodejs.git
+cd nodejs
+brew install npm
+npm install
+npm start
