@@ -2,3 +2,36 @@ npx create-react-app radix-app
 cd radix-app
 npm install @radix-ui/themes @radix-ui/react-dialog @radix-ui/react-icons
 
+
+
+
+
+
+
+
+
+export NODE_OPTIONS=--openssl-legacy-provider && npm start
+npm install react-router-dom@latest
+
+
+npx create-react-app radix-app
+cd radix-app
+npm install @radix-ui/themes @radix-ui/react-dialog @radix-ui/react-icons
+npm install --legacy-peer-deps
+
+
+npm install react react-dom rechart
+npm list react
+
+
+
+{/*https://www.radix-ui.com/primitives/docs/components/navigation-menu*/}
+
+
+
+
+
+
+
+https://recharts.org/en-US/api/AreaChart
+
