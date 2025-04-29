@@ -1,1 +1,4 @@
-Readme.txt
+npx create-react-app radix-app
+cd radix-app
+npm install @radix-ui/themes @radix-ui/react-dialog @radix-ui/react-icons
+
