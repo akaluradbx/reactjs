@@ -26,6 +26,7 @@ npm list react
 
 
 {/*https://www.radix-ui.com/primitives/docs/components/navigation-menu*/}
+https://blocks.tremor.so/templates
 
 
 
